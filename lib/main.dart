@@ -1,7 +1,4 @@
-import 'dart:async';
-
 import 'package:closure001/cool_module/cool_module_widget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -79,9 +76,11 @@ class ElementaryWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('wrapper::build, $hashCode');
+    print('wrapper::build, $hashCode, $value');
     return CoolModuleWidget(
       builder: (_, __) {
+        // Вот здесь при повторных вызодах билдера ссылка на value и hashCode
+        // остаётся изначальной
         print('builder::call, $hashCode');
         return Text("builder: $value, $hashCode");
       },

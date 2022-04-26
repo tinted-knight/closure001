@@ -6,6 +6,7 @@ import 'cool_module_wm.dart';
 /// Main widget for CoolModule module
 class CoolModuleWidget extends ElementaryWidget<ICoolModuleWidgetModel> {
   final Widget Function(BuildContext context, int value) builder;
+
   const CoolModuleWidget({
     required this.builder,
     Key? key,
@@ -19,7 +20,7 @@ class CoolModuleWidget extends ElementaryWidget<ICoolModuleWidgetModel> {
         ValueListenableBuilder<int>(
           valueListenable: wm.notifier,
           builder: (context, value, _) {
-           return builder(context, value);
+            return builder(context, value);
           },
         ),
       ],
