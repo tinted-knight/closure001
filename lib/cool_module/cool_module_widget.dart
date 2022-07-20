@@ -5,12 +5,15 @@ import 'cool_module_wm.dart';
 // TODO: cover with documentation
 /// Main widget for CoolModule module
 class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
+  final int notifierValue;
+  final int counterValue;
+
   CoolModuleWidget({
-    required int notifierValue,
-    required int counterValue,
+    required this.notifierValue,
+    required this.counterValue,
     Key? key,
   }) : super(
-          (context) => defaultCoolModuleWidgetModelFactory(
+          (context) => CoolModuleWidgetModel.factory(
             context,
             notifierValue,
             counterValue,

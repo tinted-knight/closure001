@@ -4,18 +4,6 @@ import 'package:flutter/material.dart';
 import 'cool_module_model.dart';
 import 'cool_module_widget.dart';
 
-CoolModuleWidgetModel defaultCoolModuleWidgetModelFactory(
-  BuildContext context,
-  int notifierValue,
-  int counterValue,
-) {
-  return CoolModuleWidgetModel(
-    notifierValue,
-    counterValue,
-    CoolModuleModel(),
-  );
-}
-
 class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleModel> {
   CoolModuleWidgetModel(
     this.notifierValue,
@@ -26,6 +14,18 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
   final int notifierValue;
   final int counterValue;
 
+  factory CoolModuleWidgetModel.factory(
+    BuildContext context,
+    int notifierValue,
+    int counterValue,
+  ) {
+    return _coolModuleWidgetModelFactory(
+      context,
+      notifierValue,
+      counterValue,
+    );
+  }
+
   @override
   void initWidgetModel() {
     super.initWidgetModel();
@@ -33,14 +33,20 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
   }
 
   @override
-  void didUpdateWidget(covariant CoolModuleWidget oldWidget) {
-    print('wm::didUpdateWidget, notifier=$notifierValue, counter=$counterValue');
-    super.didUpdateWidget(oldWidget);
+  // В Элементари виджет в параметре назван oldWidget - это враньё)))
+  // На самом деле в нём как раз актуальные данные данные
+  // ignore: avoid_renaming_method_parameters
+  void didUpdateWidget(CoolModuleWidget newWidget) {
+    super.didUpdateWidget(newWidget);
+    print('wm::didUpdate, notifier=$notifierValue, counter=$counterValue');
+    print('newWidget, notifier=${newWidget.notifierValue}, counter=${newWidget.counterValue}');
+    // ??? Как здесь зафорсить отрисовку виджета CoolModelWidget
+    // (context as Element).markNeedsBuild();
   }
 
   @override
   void didChangeDependencies() {
-    print('wm::didChangeDependencies');
+    print('wm::didChangeDeps');
     super.didChangeDependencies();
   }
 
@@ -48,4 +54,16 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
   void dispose() {
     super.dispose();
   }
+}
+
+CoolModuleWidgetModel _coolModuleWidgetModelFactory(
+  BuildContext context,
+  int notifierValue,
+  int counterValue,
+) {
+  return CoolModuleWidgetModel(
+    notifierValue,
+    counterValue,
+    CoolModuleModel(),
+  );
 }

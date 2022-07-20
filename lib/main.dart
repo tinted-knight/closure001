@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ValueListenableBuilder<int>(
               valueListenable: notifier,
               builder: (context, value, __) {
-                print('vlBuilder: value=$value, counter=$_counterValue');
+                print('valueListenable: value=$value, counter=$_counterValue');
                 return CoolModuleWidget(
                   notifierValue: value,
                   counterValue: _counterValue,
