@@ -4,26 +4,23 @@ import 'cool_module_wm.dart';
 
 // TODO: cover with documentation
 /// Main widget for CoolModule module
-class CoolModuleWidget extends ElementaryWidget<ICoolModuleWidgetModel> {
-  final Widget Function(BuildContext context, int value) builder;
-
-  const CoolModuleWidget({
-    required this.builder,
+class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
+  CoolModuleWidget({
+    required int notifierValue,
+    required int counterValue,
     Key? key,
-    WidgetModelFactory wmFactory = defaultCoolModuleWidgetModelFactory,
-  }) : super(wmFactory, key: key);
+  }) : super(
+          (context) => defaultCoolModuleWidgetModelFactory(
+            context,
+            notifierValue,
+            counterValue,
+          ),
+          key: key,
+        );
 
   @override
-  Widget build(ICoolModuleWidgetModel wm) {
-    return Column(
-      children: [
-        ValueListenableBuilder<int>(
-          valueListenable: wm.notifier,
-          builder: (context, value, _) {
-            return builder(context, value);
-          },
-        ),
-      ],
-    );
+  Widget build(CoolModuleWidgetModel wm) {
+    print('build::elementary, ${wm.notifierValue}');
+    return Text("ElementaryWidget value: ${wm.notifierValue}, $hashCode");
   }
 }

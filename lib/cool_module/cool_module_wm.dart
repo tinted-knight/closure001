@@ -1,43 +1,51 @@
-import 'dart:async';
-
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+
 import 'cool_module_model.dart';
 import 'cool_module_widget.dart';
 
-abstract class ICoolModuleWidgetModel extends IWidgetModel {
-  ValueNotifier<int> get notifier;
-}
-
 CoolModuleWidgetModel defaultCoolModuleWidgetModelFactory(
-    BuildContext context) {
-  return CoolModuleWidgetModel(CoolModuleModel());
+  BuildContext context,
+  int notifierValue,
+  int counterValue,
+) {
+  return CoolModuleWidgetModel(
+    notifierValue,
+    counterValue,
+    CoolModuleModel(),
+  );
 }
 
-// TODO: cover with documentation
-/// Default widget model for CoolModuleWidget
-class CoolModuleWidgetModel
-    extends WidgetModel<CoolModuleWidget, CoolModuleModel>
-    implements ICoolModuleWidgetModel {
-  @override
-  final notifier = ValueNotifier<int>(0);
+class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleModel> {
+  CoolModuleWidgetModel(
+    this.notifierValue,
+    this.counterValue,
+    CoolModuleModel model,
+  ) : super(model);
 
-  Timer? _timer;
-
-  CoolModuleWidgetModel(CoolModuleModel model) : super(model);
+  final int notifierValue;
+  final int counterValue;
 
   @override
   void initWidgetModel() {
     super.initWidgetModel();
-    // Simulating update of some data to force ValueListenableBuilder::builder
-    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
-      notifier.value += 1;
-    });
+    print('wm::init');
+  }
+
+  @override
+  void didUpdateWidget(covariant CoolModuleWidget oldWidget) {
+    print('wm::didUpdateWidget, notifier=$notifierValue, counter=$counterValue');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('wm::didChangeDependencies');
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
     super.dispose();
   }
 }
