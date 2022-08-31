@@ -33,13 +33,18 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
   }
 
   @override
-  // В Элементари виджет в параметре назван oldWidget - это враньё)))
-  // На самом деле в нём как раз актуальные данные данные
-  // ignore: avoid_renaming_method_parameters
-  void didUpdateWidget(CoolModuleWidget newWidget) {
-    super.didUpdateWidget(newWidget);
-    print('wm::didUpdate, notifier=$notifierValue, counter=$counterValue');
-    print('newWidget, notifier=${newWidget.notifierValue}, counter=${newWidget.counterValue}');
+  void didUpdateWidget(CoolModuleWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    print("===============================");
+    print('wm::didUpdate, '
+        'notifier=$notifierValue, '
+        'counter=$counterValue');
+    print('oldWidget, '
+        'notifier=${oldWidget.notifierValue}, '
+        'counter=${oldWidget.counterValue}');
+    print('widget, '
+        'notifier=${widget.notifierValue}, '
+        'counter=${widget.counterValue}');
     // ??? Как здесь зафорсить отрисовку виджета CoolModelWidget
     // (context as Element).markNeedsBuild();
   }
