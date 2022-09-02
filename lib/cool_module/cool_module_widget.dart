@@ -24,6 +24,16 @@ class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
   @override
   Widget build(CoolModuleWidgetModel wm) {
     print('build::elementary, ${wm.notifierValue}');
-    return Text("ElementaryWidget value: ${wm.notifierValue}, $hashCode");
+    return Column(
+      children: [
+        Text("ElementaryWidget value: ${wm.notifierValue}, $hashCode"),
+        SizedBox(height: 16),
+        ValueListenableBuilder<int>(
+            valueListenable: wm.notifier,
+            builder: (context, value, _) {
+              return Text("DidUpdate value: $value, $hashCode");
+            }),
+      ],
+    );
   }
 }

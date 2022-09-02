@@ -9,10 +9,13 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
     this.notifierValue,
     this.counterValue,
     CoolModuleModel model,
-  ) : super(model);
+  )   : notifier = ValueNotifier(notifierValue),
+        super(model);
 
   final int notifierValue;
   final int counterValue;
+
+  final ValueNotifier<int> notifier;
 
   factory CoolModuleWidgetModel.factory(
     BuildContext context,
@@ -35,6 +38,7 @@ class CoolModuleWidgetModel extends WidgetModel<CoolModuleWidget, CoolModuleMode
   @override
   void didUpdateWidget(CoolModuleWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
+    notifier.value = widget.notifierValue;
     print("===============================");
     print('wm::didUpdate, '
         'notifier=$notifierValue, '
