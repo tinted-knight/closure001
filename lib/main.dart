@@ -52,12 +52,22 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Main.dart',
             ),
             Text(
-              '$_counterValue',
+              'Counter: $_counterValue',
               style: Theme.of(context).textTheme.headline4,
             ),
+            ValueListenableBuilder<int>(
+              valueListenable: notifier,
+              builder: (context, value, __) {
+                return Text(
+                  'Notifier: ${notifier.value}',
+                  style: Theme.of(context).textTheme.headline4,
+                );
+              },
+            ),
+            SizedBox(height: 16),
             ValueListenableBuilder<int>(
               valueListenable: notifier,
               builder: (context, value, __) {

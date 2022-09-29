@@ -26,13 +26,18 @@ class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
     print('build::elementary, ${wm.notifierValue}');
     return Column(
       children: [
-        Text("ElementaryWidget value: ${wm.notifierValue}, $hashCode"),
-        SizedBox(height: 16),
-        ValueListenableBuilder<int>(
-            valueListenable: wm.notifier,
-            builder: (context, value, _) {
-              return Text("DidUpdate value: $value, $hashCode");
-            }),
+        Text(
+          "ElementaryWidget",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
+        Text(
+          "Counter: ${wm.counterValue}",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
+        Text(
+          "Notifier: ${wm.notifierValue}",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
       ],
     );
   }
