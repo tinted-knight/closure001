@@ -24,6 +24,21 @@ class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
   @override
   Widget build(CoolModuleWidgetModel wm) {
     print('build::elementary, ${wm.notifierValue}');
-    return Text("ElementaryWidget value: ${wm.notifierValue}, $hashCode");
+    return Column(
+      children: [
+        Text(
+          "ElementaryWidget",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
+        Text(
+          "Counter: ${wm.counterValue}",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
+        Text(
+          "Notifier: ${wm.notifierValue}",
+          style: Theme.of(wm.context).textTheme.headline6,
+        ),
+      ],
+    );
   }
 }
