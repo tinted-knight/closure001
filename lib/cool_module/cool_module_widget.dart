@@ -28,7 +28,7 @@ class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
       children: [
         Text(
           "ElementaryWidget",
-          style: Theme.of(wm.context).textTheme.headline6,
+          style: Theme.of(wm.context).textTheme.bodyMedium,
         ),
         Text(
           "Counter: ${wm.counterValue}",
@@ -38,6 +38,27 @@ class CoolModuleWidget extends ElementaryWidget<CoolModuleWidgetModel> {
           "Notifier: ${wm.notifierValue}",
           style: Theme.of(wm.context).textTheme.headline6,
         ),
+        SizedBox(height: 16),
+        Text(
+          "Listenable",
+          style: Theme.of(wm.context).textTheme.bodyMedium,
+        ),
+        ValueListenableBuilder<int>(
+            valueListenable: wm.notifier,
+            builder: (context, value, _) {
+              return Column(
+                children: [
+                  Text(
+                    "Counter: ${wm.counterValue}",
+                    style: Theme.of(wm.context).textTheme.headline6,
+                  ),
+                  Text(
+                    "Notifier: $value",
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
+                ],
+              );
+            }),
       ],
     );
   }
